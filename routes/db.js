@@ -1,7 +1,7 @@
    
     var mongo = require("mongodb");
     var MongoClient = require('mongodb').MongoClient;
-    var url = 'mongodb://localhost:27017/activites';
+    var url = 'mongodb://<jrey6991>:<Joyrey6991>@ds135926.mlab.com:35926/activites';
     var ObjectID = require('mongodb').ObjectID;
     var concat = require('array-concat');
     var sortBy = require('sort-by');
