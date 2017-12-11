@@ -8,7 +8,7 @@
 
     /* Envoyer des données à la base de donnée */
     function sendToDatabase(list, variable) {
-      var server = new mongo.Server("mongodb://<jrey6991>:<Joyrey6991>@ds135926.mlab.com:35926/activites", 3000);
+      var server = new mongo.Server("<jrey6991>:<Joyrey6991>@ds135926.mlab.com", 35926);
       var db = new mongo.Db("activites", server, {safe:true});
       db.open(function (err, db) {
         if (err) {
