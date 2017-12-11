@@ -79,7 +79,6 @@
       })
     } else if (typeInstallation == 'piscine'){
       db.getPiscinesByNom(nomInstallation, function(piscine){
-        console.log(piscine[0]);
         res.send(piscine[0]);
       })
     }
@@ -120,20 +119,17 @@
   /* Liste des installations en mauvaise condition en format csv */
   router.get('/installations/mauvaiseCondition/csv', function(req, res){
     db.getInstallationsByConditionCsv( function(listeInstallationsCsv) {
-      console.log(listeInstallationsCsv);
       var fields = ['nom', 'nom_arr', 'cle', 'date_maj', 'ouvert', 'deblaye', 'condition'];       
         res.setHeader('Content-Type', 'text/csv');
         var csv = json2csv({ data: listeInstallationsCsv.Mauvaise, fields: fields });
         res.status(200).send(csv);
       })
   });
-      //cron.schedule(' 0 0 * * *', function(){
-    //  console.log('running a task every minute');
-    
+    cron.schedule('* * * * *', function(){  
     /* Récupérer les données des patinoires en xml, les transformées en json puis les mettre dans la base de donnée */
       request.get('http://www2.ville.montreal.qc.ca/services_citoyens/pdf_transfert/L29_PATINOIRE.xml', function (err, response) {
         if (err) {
-          console.log("err");
+          console.log("Erreur");
         } else {
           var data = response.body;
           parser.parseString(data, function(err, result){
@@ -160,7 +156,7 @@
       /* Récupérer les données des glissades en xml, les transformées en json puis les mettre dans la base de donnée */
       request.get('http://www2.ville.montreal.qc.ca/services_citoyens/pdf_transfert/L29_GLISSADE.xml', function (err, response) {
         if (err) {
-          console.log("err de");
+          console.log("Erreur");
         } else {
           var data = response.body;
           parser.parseString(data, function(err, result){
@@ -185,7 +181,7 @@
       /* Récupérer les données des piscines en csv, les transformées en json puis les mettre dans la base de donnée */
       request.get("http://donnees.ville.montreal.qc.ca/dataset/4604afb7-a7c4-4626-a3ca-e136158133f2/resource/cbdca706-569e-4b4a-805d-9af73af03b14/download/piscines.csv", function (err, response) {
         if (err) {
-          console.log("err de");
+          console.log("Erreur");
         } else {
           var data = response.body;
         csv()
@@ -195,7 +191,7 @@
           });
         }
       });
-  //});
+  });
 
     
   module.exports = router;

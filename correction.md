@@ -9,7 +9,7 @@
 
 ## Lancer le projet
 
-  Pour lancer le projet, une fois que le fichier est extrait, ouvrir un terminal, se rendre dans le dossier du projet, faire la commande "npm install" pour installer les dépendances puis lancer le projet avec "npm start". Le projet est maintenant lancer et vous pouvez accéeder à l'interface graphique en allant sur http://localhost:3000/ dans votre fureteur.
+  Pour lancer le projet, une fois que le fichier est extrait,s'assurer que le serveur est lancé. Ouvrir un terminal, se rendre dans le dossier du projet, faire la commande "npm install" pour installer les dépendances puis lancer le projet avec "npm start". Le projet est maintenant lancer et vous pouvez accéeder à l'interface graphique en allant sur http://localhost:3000/ dans votre fureteur.
 
 ## Remarque
 
