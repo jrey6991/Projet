@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			table th, td{
+				border: 1px solid grey;
+			}
+			table{
+				border-collapse: collapse;
+			}
+			ul{
+				list-style-type : none;
+			}
+		</style>
+		<title>Formulaire de recherche</title>
+	</head>
+	<body>
+		<h1> Bienvenue !</h1>
+		<form method="get", action="installations">
+			<p> Entrer votre recherche </p> <br>
+			<input type="text" name="arrondissement" id="arrondissement"> <br>
+			<input type="submit" name="Envoyer" id="bouton" >
+		</form>
+		<br/>
+		<br/>
+		<form method="get", action="installations/recherche">
+			<label for="listeDeroulante">Liste installations</label>
+			<select id="listeDeroulante"></select>
+			<input type="submit" name="Rechercher" id="boutonRechercher" >
+		</form>
+		<br/>
+		<br/>
+
+		<ul id="listeAttributs"></ul>
+		<table id="my-table">
+			<thead>
+				<th data-dynatable-column="nom">Noms</th>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="./javascripts/jquery.dynatable.js"></script>
+	<script src="./javascripts/fichier.js"></script>
+</html>

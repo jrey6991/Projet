@@ -1,0 +1,201 @@
+  #%RAML 0.8
+  title: Installations
+  baseUri: http://localhost:3000
+  version: 1
+  /installations:
+    get:
+      description: Fournir la liste des installations situées dans un certain arrondissement.
+      queryParameters:
+        arrondissement:
+          description: Spécifier l'arrondissement dont on veut connaître les installations
+          type: string
+          required: true
+          example: "Le Sud-Ouest"
+      responses:
+        200:
+          description: "Liste des installations de l'arrondissement."
+          body:
+            application/json:
+              example: |
+                {
+                    glissades
+                    [
+                      {
+                        "nom":"Aire de glissade, Ignace-Bourget",
+                        "nom_arr":"Le Sud-Ouest",
+                        "cle":"sou",
+                        "date_maj":"2017-11-23 08:13:51",
+                        "ouvert":"0",
+                        "deblaye":"0",
+                        "condition":"N/A"
+                      }
+                    ]
+                }
+        500:
+          description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+  /init:
+    get: 
+      description: Fournir la liste de toutes les installations
+      responses:
+        200:
+          description: Les installations sont bien envoyées.
+          body:
+            application/json: 
+              example: |
+                {
+                    glissades
+                    [
+                      {
+                        "nom":"Aire de glissade, Ignace-Bourget",
+                        "nom_arr":"Le Sud-Ouest",
+                        "cle":"sou",
+                        "date_maj":"2017-11-23 08:13:51",
+                        "ouvert":"0",
+                        "deblaye":"0",
+                        "condition":"N/A"
+                      }
+                    ],
+                    patinoires
+                    [
+                      {
+                        "nom":"Patinoire avec bandes, De la Vérendrye (PSE)",
+                        "nom_arr":"Le Sud-Ouest",
+                        "cle":"sou",
+                        "date_maj":"2017-11-23 08:13:51",
+                        "ouvert":"0",
+                        "deblaye":"0",
+                        "arrose":"0",
+                        "resurface":"0",
+                        "condition":"N/A"
+                      }
+                    ]
+                }       
+        500:
+          description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+  /installations/recherche:
+    get:
+      description: Fournir les informations connues sur l'installation dont le nom est spécifier
+      queryParameters:
+        nomInstallation:
+          description: Spécifier le nom de l'installation dont on veut connaître les informations
+          type: string
+          required: true
+          example: "Aire de glissade, Ignace-Bourget"
+      responses:
+        200:
+          description: Les informations sont bien envoyées
+          body:
+            application/json:
+              example:  |
+                {
+                    installation
+                    [
+                      {
+                        "nom":"Aire de glissade, Ignace-Bourget",
+                        "nom_arr":"Le Sud-Ouest",
+                        "cle":"sou",
+                        "date_maj":"2017-11-23 08:13:51",
+                        "ouvert":"0",
+                        "deblaye":"0",
+                        "condition":"N/A"
+                      }
+                    ]
+                }
+        500:
+          description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+  /installations/mauvaiseCondition:
+    get:
+      description: Fournir la liste des installations en mauvaise condition
+      responses:
+        200:
+          description: La liste des installations en mauvaise condition a bien été envoyée
+          body:
+            application/json:
+              example:  |
+                {
+                    installation
+                    [
+                      {
+                        "nom":"Anneau à patiner  du parc Hayward (PPL)",
+                        "nom_arr":"LaSalle",
+                        "cle":"lsl",
+                        "date_maj":"2017-12-04 11:16:37",
+                        "ouvert":"0",
+                        "deblaye":"",
+                        "arrose":"",
+                        "resurface":"",
+                        "condition":"Mauvaise"
+                      }
+                    ]
+                }
+        500:
+          description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+  /installations/mauvaiseCondition/xml:
+    get:
+      description: Fournir la liste des installations en mauvaise condition en format xml
+      responses:
+        200:
+          description: La liste des installations en mauvaise condition a bien été envoyée
+          body:
+            application/xml:
+              example:  |
+                  <?xml version="1.0" encoding="UTF-8" ?>
+                    <listeInstallationsXml>
+                      <nom>Anneau à patiner  du parc Hayward (PPL)</nom>
+                      <nom_arr>LaSalle</nom_arr>
+                      <cle>lsl</cle>
+                      <date_maj>2017-12-04 11:16:37</date_maj>
+                      <ouvert>0</ouvert>
+                      <deblaye/>
+                      <arrose/>
+                      <resurface/>
+                      <condition>Mauvaise</condition>
+                   </listeInstallationsXml>
+        500:
+          description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+  /installations/mauvaiseCondition/csv:
+    get:
+      description: Fournir la liste des installations en mauvaise condition en format csv
+      responses:
+        200:
+          description: La liste des installations en mauvaise condition a bien été envoyée
+          body:
+            text/csv:
+              example: |
+                nom,arrondissement,ouvert,deblaye,arrose,resurface,condition
+                "Anneau à patiner  du parc Hayward (PPL)",LaSalle|lsl|2017-12-04 11:16:37,0,"","","",Mauvaise
+        500:
+          description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+  /installations/modifier:
+    patch:
+      description: Modifier une glissade selon son identifiant.
+      body:
+        application/json:
+          example: |
+            {
+                "id": "5a2dcb767c727b3213308929",
+                "condition": "Mauvaise"
+            }
+      responses:
+        200:
+          description: La glissade a bien été modifiée.
+        404:
+          description: L'identifiant spécifié n'existe pas.
+        500:
+          description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+  /installations/supprimer:
+    delete:
+      description: Supprimer une glissade.
+      body:
+        application/json:
+          example: |
+            {
+                "id": "5a2dcb767c727b3213308929"
+            }
+      responses:
+        200:
+          description: La glissade a été supprimée.
+        404:
+          description: L'identifiant spécifié n'existe pas.
+        500:
+          description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
